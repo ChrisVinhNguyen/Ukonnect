@@ -33,7 +33,7 @@
             android:onClick="toAddNew"/>
 
         <Button
-            android:id="@+id/lookAtMyClubList_Button"
+            android:id="@+id/MyClubList_Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#E0F2F1"
