@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#E0F2F1"
-            android:text="Look at my clubs list"
+            android:text="My club list"
             android:drawableLeft="@drawable/ic_list_black_24dp"
             android:paddingLeft="5dp"/>
 
