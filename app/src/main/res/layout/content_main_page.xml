@@ -39,7 +39,8 @@
             android:background="#E0F2F1"
             android:text="My club list"
             android:drawableLeft="@drawable/ic_list_black_24dp"
-            android:paddingLeft="5dp"/>
+            android:paddingLeft="5dp"
+            android:onClick="toMyClubList"/>
 
         <LinearLayout
             android:layout_width="match_parent"
