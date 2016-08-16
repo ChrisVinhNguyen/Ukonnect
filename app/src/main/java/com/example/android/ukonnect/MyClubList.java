@@ -1,7 +1,11 @@
 package com.example.android.ukonnect;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.ArraySet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,10 +14,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Vector;
 
 
 public class MyClubList extends AppCompatActivity {
+    public static final String prefName= "MyClubListPref";
+    public Set<String> clubSet= new HashSet<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +47,48 @@ public class MyClubList extends AppCompatActivity {
                 addClub();
             }
         });*/
+
+        //loading shared preferences
+
+
+       // String clubName;
+
+        //setting content view
         setContentView(R.layout.activity_my_club_list);
+
 }
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        SharedPreferences list= getSharedPreferences(prefName,0);
+        Set<String> newClubList = new HashSet<>();
+        newClubList.add("No Clubs Added");
+
+        clubSet= list.getStringSet("Club_List",newClubList);
+
+        LinearLayout list_layout= (LinearLayout) findViewById(R.id.Club_List_linear);
+        Iterator iterator= clubSet.iterator();
+
+       while(iterator.hasNext()) {
+           String name = (String) iterator.next();
+           Button newClub = new Button(this);
+           newClub.setText(name);
+           list_layout.addView(newClub);
+       }
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+
+        //saving preferences
+        SharedPreferences list= getSharedPreferences(prefName,0);
+        SharedPreferences.Editor editor = list.edit();
+        editor.putStringSet("Club_List",clubSet);
+
+        editor.commit();
+
+    }
     public void listAddClub(View view){
        /* Button testButton= (Button) view;
         if(testButton.getText()=="Add Club") {
@@ -58,7 +107,11 @@ public class MyClubList extends AppCompatActivity {
         //Add Button
 
         Button newClub= new Button(this);
-        newClub.setText("TEST");
+
+        String clubName="test";
+        newClub.setText(clubName);
+
+        clubSet.add(clubName);
 
         list_layout.addView(newClub);
     }
