@@ -7,11 +7,23 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.example.android.ukonnect.AddNewActivity">
 
-    <TextView
+    <SearchView
+        android:id="@+id/Club_Name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Test"/>
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="Club Name"/>
+    <Button
+        android:id="@+id/AddClub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E0F2F1"
+        android:text="Add Club"
+        android:drawableLeft="@drawable/ic_add_black_24dp"
+        android:paddingLeft="5dp"
+        android:onClick="addClub"/>
 
 </LinearLayout>
