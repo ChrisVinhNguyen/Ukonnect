@@ -12,7 +12,7 @@ public class AddNewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Add New Club");
+        //setTitle(" New Club");
         setContentView(R.layout.activity_add_new);
     }
     public void addClub(View view){

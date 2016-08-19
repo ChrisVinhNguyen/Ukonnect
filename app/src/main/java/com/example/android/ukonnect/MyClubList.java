@@ -27,7 +27,7 @@ public class MyClubList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("My Club List-testing java layout");
+        //setTitle("My Club List-testing java layout");
        /* final Button testButton = new Button(this);
         testButton.setText("TEST");
 
@@ -78,8 +78,8 @@ public class MyClubList extends AppCompatActivity {
        }
     }
     @Override
-    protected void onStop(){
-        super.onStop();
+    protected void onPause(){
+        super.onPause();
 
         //saving preferences
         SharedPreferences list= getSharedPreferences(prefName,0);
@@ -87,6 +87,7 @@ public class MyClubList extends AppCompatActivity {
         editor.putStringSet("Club_List",clubSet);
 
         editor.commit();
+        //clubSet.clear();
 
     }
     public void listAddClub(View view){

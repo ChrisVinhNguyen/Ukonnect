@@ -26,7 +26,7 @@
             android:id="@+id/addNewClub_Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add New Club"
+            android:text="Browse Clubs"
             android:background="#FFFFFF"
             android:drawableLeft="@drawable/ic_add_black_24dp"
             android:paddingLeft="5dp"

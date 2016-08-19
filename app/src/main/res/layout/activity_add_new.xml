@@ -16,14 +16,168 @@
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
         android:queryHint="Club Name"/>
-    <Button
-        android:id="@+id/AddClub"
+    <TextView
+        android:id="@+id/eventNotifications_Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#E0F2F1"
-        android:text="Add Club"
-        android:drawableLeft="@drawable/ic_add_black_24dp"
-        android:paddingLeft="5dp"
-        android:onClick="addClub"/>
+        android:text="Categories"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:paddingBottom="10dp"
+        android:textSize="30dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:paddingTop="10dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Catagory_List"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/Catagory_List_linear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="All Areas"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Academic"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Arts"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Athletics and Recreation"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Community Service"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Culture and Identities"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Environment and Sustainability"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Hobby and Leisure"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Global Interests"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Leadership"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Media"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Polotics"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Sotial Justice/Advocacy"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Sotial"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Spirituality and Faith Communities"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Student Govornments and Councils"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E0F2F5"
+                android:text="Work and Career development"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textSize="13sp"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
