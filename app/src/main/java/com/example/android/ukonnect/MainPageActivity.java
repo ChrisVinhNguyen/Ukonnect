@@ -163,7 +163,7 @@ public class MainPageActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    //Button to My club list**CHRIS
+    //Button to My club list**CHRIS*****************************************************************************************************************************************************************************************************************IM the best
     public void toMyClubList(View view) {
         Intent intent = new Intent(this, MyClubList.class);
         startActivity(intent);
