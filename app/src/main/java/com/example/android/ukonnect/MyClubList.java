@@ -1,28 +1,23 @@
 package com.example.android.ukonnect;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.ArraySet;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.Vector;
 
 
 public class MyClubList extends AppCompatActivity {
     public static final String prefName= "MyClubListPref";
     public Set<String> clubSet= new HashSet<>();
+
+    public Set<String> testSet=new HashSet<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +65,14 @@ public class MyClubList extends AppCompatActivity {
         LinearLayout list_layout= (LinearLayout) findViewById(R.id.Club_List_linear);
         Iterator iterator= clubSet.iterator();
 
+       /* testSet.add("1");
+        testSet.add("2");
+        testSet.add("3");
+        testSet.add("4");
+        testSet.add("5");
+
+        Iterator iterator= testSet.iterator();*/
+
        while(iterator.hasNext()) {
            String name = (String) iterator.next();
            Button newClub = new Button(this);
@@ -109,7 +112,7 @@ public class MyClubList extends AppCompatActivity {
 
         Button newClub= new Button(this);
 
-        String clubName="test";
+        String clubName="qwrqwvtgyiftgyuiivr";
         newClub.setText(clubName);
 
         clubSet.add(clubName);

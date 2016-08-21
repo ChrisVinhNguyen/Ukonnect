@@ -1,18 +1,22 @@
 package com.example.android.ukonnect;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class MainPageActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +45,55 @@ public class MainPageActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        ////////////////////////////////////THIS MIGHT NOT WORK////////////////////////////////////////////////////
+
+        SQLiteDatabase myDB = null;
+        String TableName = "myTable";
+
+        String Data = "";
+
+  /* Create a Database. */
+        try {
+            myDB = this.openOrCreateDatabase("DatabaseName", MODE_PRIVATE, null);
+
+   /* Create a Table in the Database. */
+            myDB.execSQL("CREATE TABLE IF NOT EXISTS "
+                    + TableName
+                    + " (Field1 VARCHAR, Field2 INT(3));");
+
+   /* Insert data to a Table*/
+            myDB.execSQL("INSERT INTO "
+                    + TableName
+                    + " (Field1, Field2)"
+                    + " VALUES ('Saranga', 22);");
+
+            Cursor c = myDB.rawQuery("SELECT * FROM " + TableName, null);
+
+            int Column1 = c.getColumnIndex("Field1");
+            int Column2 = c.getColumnIndex("Field2");
+
+            // Check if our result was valid.
+            c.moveToFirst();
+            if (c != null) {
+                // Loop through all Results
+
+                String Name = c.getString(Column1);
+                int Age = c.getInt(Column2);
+                Data = Data + Name + "/" + Age + "\n";
+                TextView test= (TextView) findViewById(R.id.test_database);
+                test.setText(Data);
+            }
+        } catch (Exception e) {
+            Log.e("Error", "Error", e);
+        } finally {
+            if (myDB != null)
+                myDB.close();
+        }
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     @Override
@@ -105,13 +158,13 @@ public class MainPageActivity extends AppCompatActivity
      */
 
     //Button to Add new Club
-    public void toAddNew(View view){
+    public void toAddNew(View view) {
         Intent intent = new Intent(this, AddNewActivity.class);
         startActivity(intent);
     }
 
     //Button to My club list**CHRIS
-    public void toMyClubList(View view){
+    public void toMyClubList(View view) {
         Intent intent = new Intent(this, MyClubList.class);
         startActivity(intent);
     }
