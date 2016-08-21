@@ -32,11 +32,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddNewActivity"
-            android:label="Browse Clubs"/>
-        <activity android:name=".MyClubList"
-            android:label="My Club List"></activity>
-
+        <activity
+            android:name=".AddNewActivity"
+            android:label="Browse Clubs" />
+        <activity
+            android:name=".MyClubList"
+            android:label="My Club List" />
+        <activity
+            android:name=".ClubPageActivity"
+            android:label="Club Page" />
+        <activity
+            android:name=".ClubListActivity"/>
     </application>
 
 </manifest>

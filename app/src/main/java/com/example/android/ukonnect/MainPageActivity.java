@@ -103,12 +103,14 @@ public class MainPageActivity extends AppCompatActivity
     /*
      * NOT Default Functions
      */
- //Button to Add new Club
+
+    //Button to Add new Club
     public void toAddNew(View view){
         Intent intent = new Intent(this, AddNewActivity.class);
         startActivity(intent);
     }
-//Button to My club list**CHRIS
+
+    //Button to My club list**CHRIS
     public void toMyClubList(View view){
         Intent intent = new Intent(this, MyClubList.class);
         startActivity(intent);

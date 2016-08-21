@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
         android:queryHint="Club Name"/>
+
     <TextView
         android:id="@+id/eventNotifications_Text"
         android:layout_width="match_parent"
@@ -36,148 +37,201 @@
         android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/Catagory_List_linear"
+            android:id="@+id/Category_List_linear"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
             android:orientation="vertical">
+
             <Button
+                android:id="@+id/all_areas_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="All Areas"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/academic_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Academic"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/arts_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Arts"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/athletics_and_recreation_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Athletics and Recreation"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/community_service_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Community Service"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/culture_and_identities_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Culture and Identities"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/environment_and_sustainability_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Environment and Sustainability"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/hobby_and_leisure_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Hobby and Leisure"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/global_interests_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Global Interests"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/leadership_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Leadership"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/media_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Media"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/politics_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Polotics"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/social_justice_and_advocacy_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Sotial Justice/Advocacy"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/social_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
-                android:text="Sotial"
+                android:background="@color/colorButtons"
+                android:text="Social"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/spirituality_and_faith_communities_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
+                android:background="@color/colorButtons"
                 android:text="Spirituality and Faith Communities"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/student_governments_and_councils_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
-                android:text="Student Govornments and Councils"
+                android:background="@color/colorButtons"
+                android:text="Student Governments and Councils"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
             <Button
+                android:id="@+id/work_and_career_development_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0F2F5"
-                android:text="Work and Career development"
+                android:background="@color/colorButtons"
+                android:text="Work and Career Development"
                 android:paddingLeft="5dp"
                 android:layout_margin="10dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:onClick="toClubList"/>
+
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

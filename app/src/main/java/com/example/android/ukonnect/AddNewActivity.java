@@ -1,31 +1,40 @@
 package com.example.android.ukonnect;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class AddNewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setTitle(" New Club");
         setContentView(R.layout.activity_add_new);
+
+        // remove popup of keyboard in this activity
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
-    public void addClub(View view){
-        //just toggles name for now
-        Button testButton= (Button) view;
 
-        if(testButton.getText()=="Add Club") {
-            testButton.setText("Add Club!");
-        }
+    public void toClubList(View view){
 
-        else{
-            testButton.setText("Add Club");
-        }
+        // make sure view in arguments is a TextView
+        TextView category = (TextView) view;
+
+        // get the text from the TextView that is passed
+        String categoryName = category.getText().toString();
+
+        // link intent to ClubListActivity and pass in the category name
+        Intent intent = new Intent(this, ClubListActivity.class);
+        intent.putExtra("category",categoryName);
+        startActivity(intent);
     }
 }
 
