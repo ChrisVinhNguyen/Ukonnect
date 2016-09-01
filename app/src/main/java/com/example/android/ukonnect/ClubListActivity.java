@@ -1,5 +1,6 @@
 package com.example.android.ukonnect;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,15 +15,18 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.Vector;
 
 public class ClubListActivity extends AppCompatActivity {
 
     Document htmlDocument;
     Elements li;
     Element node;
-    String parsed_club_name;
+    Vector<String> parsed_club_names;
     String url;
-    Button club;
+   // Button club;
+    LinearLayout online_club_list;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,20 +38,32 @@ public class ClubListActivity extends AppCompatActivity {
 
         setTitle(categoryName);
 
-        categoryName= categoryName.toLowerCase();
-        String[] shortenedString=categoryName.split(" ");
-        url="https://www.ulife.utoronto.ca/interests/list/type/"+shortenedString[0];
+        categoryName = categoryName.toLowerCase();
+        ///////////ADD EXCEPTION FOR SOCIAL JUSTICE/ADVOCACY////////////////
+        if(categoryName=="social justice/advocacy"){
+            url="https://www.ulife.utoronto.ca/interests/list/type/justice";
+        }
+        //////////////NOT WORKING ATM,FUCK IT ILL DO IT LATER//////////////////
+        else {
+            String[] shortenedString = categoryName.split(" ");
+            url = "https://www.ulife.utoronto.ca/interests/list/type/" + shortenedString[0];
+        }
+
+        ClubListActivity.context = getApplicationContext();
+        parsed_club_names=new Vector<>(25,10);
     }
-    ///////////ADD EXCEPTION FOR SOCIAL JUSTICE/ADVOCACY////////////////
+
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        club=new Button(this);
+        //club = new Button(this);
+        online_club_list = (LinearLayout) findViewById(R.id.Club_List_Online);
 
         JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
+
     }
 
     private class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -66,18 +82,31 @@ public class ClubListActivity extends AppCompatActivity {
                 Log.e("List", "Failed to load HTML code", e);
             }
 
-            li = htmlDocument.select("ul.listing.innerListing > li > a");
-            node = htmlDocument.select("ul.listing.innerListing > li > a").get(0);
+            li = htmlDocument.select("ul.listing.innerListing > li");
 
-            parsed_club_name = node.text();
-
+           for(int i=0;i<li.size();i++) {
+                node = htmlDocument.select("ul.listing.innerListing > li > a").get(i);
+                parsed_club_names.addElement(node.text());
+            }
             return null;
         }
+
         @Override
-        protected void onPostExecute(Void result){
-            LinearLayout online_club_list = (LinearLayout) findViewById(R.id.Club_List_Online);
-            club.setText(parsed_club_name);
-            online_club_list.addView(club);
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            for(int i=0;i<parsed_club_names.size();i++) {
+                Button club = new Button(context);
+                club.setText(parsed_club_names.get(i));
+                online_club_list.addView(club);
+            }
+
+            Button load_more=new Button(context);
+            load_more.setText("Load More");
+            online_club_list.addView(load_more);
         }
     }
+
+    public static Context getAppContext() {
+            return ClubListActivity.context;
+        }
 }

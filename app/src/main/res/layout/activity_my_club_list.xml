@@ -36,10 +36,10 @@
         android:onClick="internetTest"/>
 
    <ScrollView
-       android:id="@+id/Club_List"
-       android:layout_height="wrap_content"
-       android:layout_width="match_parent"
-       android:fillViewport="true">
+    android:id="@+id/Club_List"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:fillViewport="true">
 
       <LinearLayout
           android:id="@+id/Club_List_linear"
