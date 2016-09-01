@@ -19,7 +19,7 @@ import java.util.Iterator;
 public class InternetTest extends AppCompatActivity {
 
     private Document htmlDocument;
-    private String htmlPageUrl = "https://www.ulife.utoronto.ca/organizations/list/type/all/alpha/a-c";
+    private String htmlPageUrl = "https://www.ulife.utoronto.ca/interests/list/type/academic";
     private Elements div;
     private Elements ul;
     private Elements li;
@@ -57,17 +57,13 @@ public class InternetTest extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                int i=2;
+                int i=0;
                 htmlDocument = Jsoup.connect(htmlPageUrl).get();
 
                 div= htmlDocument.select("div.manageTable");
                 ul= htmlDocument.select("ul.listing.innerListing");
                 node= htmlDocument.select("ul.listing.innerListing > li > a").get(i);
-                //node=li.first();
-                //node2=node.nodeName();
-                //node=node.lastElementSibling();
 
-                //htmlContentInStringFormat = htmlDocument.title();
                 test=node.text();
             } catch (IOException e) {
                 e.printStackTrace();
