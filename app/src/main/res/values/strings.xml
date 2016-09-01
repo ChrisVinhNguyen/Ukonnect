@@ -13,4 +13,5 @@
     <string name="parse_html"> </string>
     <string name="html_button">Click to get HTML Page Title</string>
     <string name="title_activity_livepage">LivepageActivity</string>
+    <string name="ulife">https://www.ulife.utoronto.ca/</string>
 </resources>

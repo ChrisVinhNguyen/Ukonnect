@@ -44,7 +44,7 @@
             android:name=".ClubPageActivity"
             android:label="Club Page" />
         <activity android:name=".ClubListActivity" />
-        <activity android:name=".InternetTest"></activity>
+        <activity android:name=".InternetTest"/>
     </application>
 
 </manifest>

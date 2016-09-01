@@ -1,8 +1,6 @@
 package com.example.android.ukonnect;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -12,11 +10,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 public class MainPageActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,22 +44,23 @@ public class MainPageActivity extends AppCompatActivity
 
 
         ////////////////////////////////////THIS MIGHT NOT WORK////////////////////////////////////////////////////
-
+        ///////////////////////////////////DATABASE SHIT, LOOK AT SQL LATER////////////////////////////////////////
+/*
         SQLiteDatabase myDB = null;
         String TableName = "myTable";
 
         String Data = "";
 
-  /* Create a Database. */
+  //Create a Database.
         try {
             myDB = this.openOrCreateDatabase("DatabaseName", MODE_PRIVATE, null);
 
-   /* Create a Table in the Database. */
+   //Create a Table in the Database.
             myDB.execSQL("CREATE TABLE IF NOT EXISTS "
                     + TableName
                     + " (Field1 VARCHAR, Field2 INT(3));");
 
-   /* Insert data to a Table*/
+   //Insert data to a Table
             myDB.execSQL("INSERT INTO "
                     + TableName
                     + " (Field1, Field2)"
@@ -92,7 +89,7 @@ public class MainPageActivity extends AppCompatActivity
                 myDB.close();
         }
 
-
+*/
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
