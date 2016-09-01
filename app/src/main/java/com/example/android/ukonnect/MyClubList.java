@@ -1,5 +1,6 @@
 package com.example.android.ukonnect;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -93,6 +94,7 @@ public class MyClubList extends AppCompatActivity {
         //clubSet.clear();
 
     }
+
     public void listAddClub(View view){
        /* Button testButton= (Button) view;
         if(testButton.getText()=="Add Club") {
@@ -118,5 +120,10 @@ public class MyClubList extends AppCompatActivity {
         clubSet.add(clubName);
 
         list_layout.addView(newClub);
+    }
+
+    public void internetTest(View view) {
+        Intent intent = new Intent(this, InternetTest.class);
+        startActivity(intent);
     }
 }

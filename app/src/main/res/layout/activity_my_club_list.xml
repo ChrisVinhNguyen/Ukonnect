@@ -26,6 +26,15 @@
        android:paddingLeft="5dp"
        android:onClick="listAddClub"/>
 
+    <Button
+        android:id="@+id/internet_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E0F2F1"
+        android:text="internet test"
+        android:paddingLeft="5dp"
+        android:onClick="internetTest"/>
+
    <ScrollView
        android:id="@+id/Club_List"
        android:layout_height="wrap_content"
