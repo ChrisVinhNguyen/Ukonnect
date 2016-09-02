@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -75,5 +77,13 @@ public class ClubPageActivity extends AppCompatActivity {
             TextView infoView = (TextView) findViewById(R.id.club_info);
             infoView.setText(info);
         }
+    }
+    public void toGroupWebsite(View view) {
+        Button button=(Button) findViewById(R.id.group_website);
+        button.setText("Official Group Website!!!");
+    }
+    public void toContactEmail(View view) {
+        Button button=(Button) findViewById(R.id.contact_email);
+        button.setText("Contact Email!!!");
     }
 }

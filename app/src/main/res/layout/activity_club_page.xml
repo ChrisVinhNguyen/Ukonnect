@@ -89,7 +89,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#E0F2F1"
-                    android:text="Official Group Website" />
+                    android:text="Official Group Website"
+                    android:onClick="toGroupWebsite"/>
 
                 <Button
                     android:id="@+id/contact_email"
@@ -97,7 +98,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#B2DFDB"
-                    android:text="Contact Email" />
+                    android:text="Contact Email"
+                    android:onClick="toContactEmail"/>
 
             </LinearLayout>
 
@@ -125,7 +127,43 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
+                    <LinearLayout
+                        android:id="@+id/coll_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/coll_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/coll_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

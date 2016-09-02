@@ -205,7 +205,7 @@ public class ClubListActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     load_more.setText("Loading...");
                     pageNum = pageNum + 1;
-                    String newUrl = url + "/page/" + String.valueOf(pageNum);
+                    newUrl = url + "/page/" + String.valueOf(pageNum);
 
                     JsoupAsyncTask2 jsoupAsyncTask2 = new JsoupAsyncTask2();
                     jsoupAsyncTask2.execute();
