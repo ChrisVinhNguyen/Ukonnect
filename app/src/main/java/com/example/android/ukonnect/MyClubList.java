@@ -55,6 +55,13 @@ public class MyClubList extends AppCompatActivity {
         setContentView(R.layout.activity_my_club_list);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         SharedPreferences list = getSharedPreferences(prefName, 0);
         Set<String> newClubList = new HashSet<>();
         newClubList.add("No Clubs Added");
@@ -75,13 +82,6 @@ public class MyClubList extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
-
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
 
@@ -91,8 +91,15 @@ public class MyClubList extends AppCompatActivity {
         editor.putStringSet("Club_List", clubSet);
 
         editor.clear().apply();
-        //clubSet.clear();
+        clubSet.clear();
 
+
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        LinearLayout list_layout = (LinearLayout) findViewById(R.id.Club_List_linear);
+        list_layout.removeAllViews();
     }
 
     public void listAddClub(View view) {
