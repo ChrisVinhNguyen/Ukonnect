@@ -89,7 +89,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#E0F2F1"
-                    android:text="Official Group Website"
+                    android:text="Group Website"
+                    android:drawablePadding="2dip"
+                    android:paddingLeft="4dp"
+                    android:drawableLeft="@android:drawable/ic_dialog_info"
                     android:onClick="toGroupWebsite"/>
 
                 <Button
@@ -98,6 +101,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#B2DFDB"
+                    android:drawableLeft="@android:drawable/ic_dialog_email"
+                    android:paddingLeft="4dp"
+                    android:drawablePadding="2dp"
                     android:text="Contact Email"
                     android:onClick="toContactEmail"/>
 
@@ -109,6 +115,15 @@
                 android:layout_weight="1"
                 android:background="#80CBC4"
                 android:text="Club Discussion Page" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#B2D3CB"
+                android:drawableLeft="@drawable/ic_add_black_24dp"
+                android:text="Add to Club list"
+                android:onClick="addClub"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,6 +154,16 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:gravity="center"
+                            android:paddingTop="10dp"
+                            android:text="Contact Information"
+                            android:textAllCaps="false"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
 
                     </LinearLayout>
@@ -150,6 +175,17 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:gravity="center"
+                            android:paddingTop="10dp"
+                            android:text="Group Profile"
+                            android:textAllCaps="false"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
 
                     </LinearLayout>
 
@@ -159,6 +195,17 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:gravity="center"
+                            android:paddingTop="10dp"
+                            android:text="Group Leaders"
+                            android:textAllCaps="false"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
 
 
                     </LinearLayout>

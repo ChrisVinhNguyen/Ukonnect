@@ -1,6 +1,7 @@
 package com.example.android.ukonnect;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -28,8 +29,13 @@ public class MainPageActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Preferences reset", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                SharedPreferences preferences = getSharedPreferences("MyClubListPref", 0);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.commit();
+
             }
         });
 

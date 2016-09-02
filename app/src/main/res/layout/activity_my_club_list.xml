@@ -15,25 +15,17 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:iconifiedByDefault="false"
-       android:hint="Filter Clubs"/>
+       android:hint="Filter Clubs(NEED TO IMPLEMENT)"/>
    <Button
        android:id="@+id/list_AddClub"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:background="#E0F2F1"
-       android:text="Add Club"
+       android:text="Browse Clubs(MAY CRASH IF OPENED TOO MANY TIMES, DOSNT CLOSE OLD ACTIVITIES I THINK, USE WITH CAUTION)(MAY FIX LATER OR JUST REMOVE IF LAZY)"
        android:drawableLeft="@drawable/ic_add_black_24dp"
        android:paddingLeft="5dp"
-       android:onClick="listAddClub"/>
+       android:onClick="toAddNew"/>
 
-    <Button
-        android:id="@+id/internet_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#E0F2F1"
-        android:text="internet test"
-        android:paddingLeft="5dp"
-        android:onClick="internetTest"/>
 
    <ScrollView
     android:id="@+id/Club_List"
