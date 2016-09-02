@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -39,33 +41,37 @@ public class ClubListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String categoryName = intent.getExtras().getString("category");
+        online_club_list = (LinearLayout) findViewById(R.id.Club_List_Online);
 
         setTitle(categoryName);
-        categoryName = categoryName.toLowerCase();
         ulife = "https://www.ulife.utoronto.ca";
 
-        ///////////ADD EXCEPTION FOR SOCIAL JUSTICE/ADVOCACY////////////////
-        if (categoryName == "social justice/advocacy") {
+        if (categoryName.equals("Social Justice/Advocacy") ) {
             url = ulife + "/interests/list/type/justice";
         }
-        //////////////NOT WORKING ATM,FUCK IT ILL DO IT LATER//////////////////
+
         else {
+            categoryName = categoryName.toLowerCase();
             String[] shortenedString = categoryName.split(" ");
             pageNum = 1;
-            // url = "https://www.ulife.utoronto.ca/interests/list/type/" + shortenedString[0];
             url = ulife + "/interests/list/type/" + shortenedString[0] + "/page/" + String.valueOf(pageNum);
         }
 
         ClubListActivity.context = getApplicationContext();
         parsed_club_names = new Vector<>(25, 10);
 
-        online_club_list = (LinearLayout) findViewById(R.id.Club_List_Online);
+        //ProgressBar loading= new ProgressBar(context, null, R.style.GenericProgressIndicator);
+        //RelativeLayout temp= new RelativeLayout(context,null,R.style.GenericProgressBackground);
+        // temp.addView(loading);
+        // online_club_list.addView(temp);
 
         JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
+
+        // temp.setVisibility(View.INVISIBLE);
     }
 
-/////////////////////////////////////////////////////////////////IO THREAD ASYNC///////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////IO THREAD ASYNC///////////////////////////////////////////////////////////////////
     private class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -111,7 +117,7 @@ public class ClubListActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(context, ClubPageActivity.class);
                         intent.putExtra("clubPageURL", clubURL);
-                        intent.putExtra("clubName",name);
+                        intent.putExtra("clubName", name);
                         startActivity(intent);
                         club.setText(name);
                     }
@@ -167,7 +173,7 @@ public class ClubListActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            int count=0;
+            int count = 0;
             for (int i = ((pageNum - 1) * 25); i < parsed_club_names.size(); i++) {
                 final Button club = new Button(context);
                 final String name = parsed_club_names.get(i);
@@ -184,7 +190,7 @@ public class ClubListActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(context, ClubPageActivity.class);
                         intent.putExtra("clubPageURL", clubURL);
-                        intent.putExtra("clubName",name);
+                        intent.putExtra("clubName", name);
                         startActivity(intent);
                         club.setText(name);
                     }
@@ -210,6 +216,7 @@ public class ClubListActivity extends AppCompatActivity {
                     online_club_list.removeView(load_more);
                 }
             });
+
         }
     }
 
