@@ -119,7 +119,8 @@ public class ClubPageActivity extends AppCompatActivity {
         clubSet.add(clubName);
         clubSet.remove("No Clubs Added");
 
-
+        Snackbar.make(view, "Club added", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
 
         //save preferences
         SharedPreferences.Editor editor = list.edit();
@@ -127,8 +128,8 @@ public class ClubPageActivity extends AppCompatActivity {
 
         editor.clear().apply();
 
-        Intent intent2 = new Intent(this, MyClubList.class);
-        startActivity(intent2);
+       // Intent intent2 = new Intent(this, MyClubList.class);
+       // startActivity(intent2);
 
     }
 }
