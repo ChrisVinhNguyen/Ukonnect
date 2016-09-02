@@ -93,6 +93,7 @@
                     android:text="Group Website"
                     android:drawablePadding="2dip"
                     android:paddingLeft="4dp"
+                    android:visibility="gone"
                     android:drawableLeft="@drawable/ic_language_black_18dp"
                     android:onClick="toGroupWebsite"/>
 

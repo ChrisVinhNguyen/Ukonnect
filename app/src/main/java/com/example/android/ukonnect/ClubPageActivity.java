@@ -28,7 +28,7 @@ public class ClubPageActivity extends AppCompatActivity {
 
     String clubPageURL;
     String info;
-    String emailAddress;
+    String emailAddress, groupWebpage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +56,9 @@ public class ClubPageActivity extends AppCompatActivity {
         Elements desciption;
         Elements contactInfo, groupProfile, groupLeaders;
         Element node;
-        Elements contactUs;
+        Elements contactUs,officialGroupWebsite;
         Element email, website;
-        Boolean hasEmail;
+        Boolean hasEmail,hasWebsite;
 
         @Override
         protected void onPreExecute() {
@@ -83,14 +83,20 @@ public class ClubPageActivity extends AppCompatActivity {
             }
 
             contactUs = htmlDocument.select("dd:contains(Contact Us) > a[href]");
-
             if (!contactUs.hasText()) {
                 hasEmail = Boolean.FALSE;
             } else {
                 email = contactUs.first();
-                hasEmail= Boolean.TRUE;
+                hasEmail = Boolean.TRUE;
             }
 
+            officialGroupWebsite = htmlDocument.select("dd:contains(Official Group Website) > a[href]");
+            if (!officialGroupWebsite.hasText()) {
+                hasWebsite = Boolean.FALSE;
+            } else {
+                website = officialGroupWebsite.first();
+                hasWebsite = Boolean.TRUE;
+            }
             return null;
         }
 
@@ -104,36 +110,38 @@ public class ClubPageActivity extends AppCompatActivity {
                 Button emailButton = (Button) findViewById(R.id.contact_email);
                 emailButton.setVisibility(View.VISIBLE);
                 emailAddress = email.attr("href");
-                // temp.removeView(emailButton);
-            } //else {
+            }
+
+            if(hasWebsite){
+                Button websiteButton = (Button) findViewById(R.id.group_website);
+                websiteButton.setVisibility(View.VISIBLE);
+                groupWebpage = website.attr("href");
+            }
 
         }
     }
 
 
     public void toGroupWebsite(View view) {
-        Button button = (Button) findViewById(R.id.group_website);
-        //button.setText("Official Group Website!!!");
+        Button websiteButton = (Button) findViewById(R.id.group_website);
+        Uri webpage = Uri.parse(groupWebpage);
+        //
+        // websiteButton.setText(groupWebpage);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     public void toContactEmail(View view) {
-        Button button = (Button) findViewById(R.id.contact_email);
-
-
         /* Create the Intent */
-        final Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        Uri webpage = Uri.parse(emailAddress);
 
-        emailAddress = emailAddress.replace("mailto:", "");
-
-        /* Fill it with Data */
-        emailIntent.setType("plain/text");
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{emailAddress});
-        //emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
-        // emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Text");
-        emailIntent.setData(Uri.parse("mailto:"));
-
-        /* Send it off to the Activity-Chooser */
-        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     public void addClub(View view) {
