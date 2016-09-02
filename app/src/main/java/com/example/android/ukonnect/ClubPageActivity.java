@@ -2,6 +2,7 @@ package com.example.android.ukonnect;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -26,11 +27,8 @@ public class ClubPageActivity extends AppCompatActivity {
     public Set<String> clubSet = new TreeSet<>();
 
     String clubPageURL;
-    Elements desciption;
     String info;
-    Elements contactInfo, groupProfile, groupLeaders;
-    Element node;
-
+    String emailAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +53,12 @@ public class ClubPageActivity extends AppCompatActivity {
     }
 
     private class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
+        Elements desciption;
+        Elements contactInfo, groupProfile, groupLeaders;
+        Element node;
+        Elements contactUs;
+        Element email, website;
+        Boolean hasEmail;
 
         @Override
         protected void onPreExecute() {
@@ -73,12 +77,18 @@ public class ClubPageActivity extends AppCompatActivity {
 
             desciption = htmlDocument.select("div#main.internal");
             desciption = desciption.select("p");////// >P DOESN'T  WORK ///////
-
-            // contactInfo = htmlDocument.select("dl.infoDl");
-
             info = desciption.text();
             if (!desciption.hasText()) {
                 info = "No description available";
+            }
+
+            contactUs = htmlDocument.select("dd:contains(Contact Us) > a[href]");
+
+            if (!contactUs.hasText()) {
+                hasEmail = Boolean.FALSE;
+            } else {
+                email = contactUs.first();
+                hasEmail= Boolean.TRUE;
             }
 
             return null;
@@ -89,17 +99,41 @@ public class ClubPageActivity extends AppCompatActivity {
             super.onPostExecute(result);
             TextView infoView = (TextView) findViewById(R.id.club_info);
             infoView.setText(info);
+
+            if (hasEmail) {
+                Button emailButton = (Button) findViewById(R.id.contact_email);
+                emailButton.setVisibility(View.VISIBLE);
+                emailAddress = email.attr("href");
+                // temp.removeView(emailButton);
+            } //else {
+
         }
     }
 
+
     public void toGroupWebsite(View view) {
         Button button = (Button) findViewById(R.id.group_website);
-        button.setText("Official Group Website!!!");
+        //button.setText("Official Group Website!!!");
     }
 
     public void toContactEmail(View view) {
         Button button = (Button) findViewById(R.id.contact_email);
-        button.setText("Contact Email!!!");
+
+
+        /* Create the Intent */
+        final Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+
+        emailAddress = emailAddress.replace("mailto:", "");
+
+        /* Fill it with Data */
+        emailIntent.setType("plain/text");
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{emailAddress});
+        //emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
+        // emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Text");
+        emailIntent.setData(Uri.parse("mailto:"));
+
+        /* Send it off to the Activity-Chooser */
+        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
     }
 
     public void addClub(View view) {
@@ -111,7 +145,7 @@ public class ClubPageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String clubName = intent.getExtras().getString("clubName");
-        if(clubSet.contains(clubName)){
+        if (clubSet.contains(clubName)) {
             Snackbar.make(view, "Club already in list", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
             return;
@@ -128,8 +162,8 @@ public class ClubPageActivity extends AppCompatActivity {
 
         editor.clear().apply();
 
-       // Intent intent2 = new Intent(this, MyClubList.class);
-       // startActivity(intent2);
+        // Intent intent2 = new Intent(this, MyClubList.class);
+        // startActivity(intent2);
 
     }
 }
