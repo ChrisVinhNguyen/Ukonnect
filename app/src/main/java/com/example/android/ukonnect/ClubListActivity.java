@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -20,7 +19,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
 import java.util.Vector;
 
 public class ClubListActivity extends AppCompatActivity {
@@ -133,9 +131,9 @@ public class ClubListActivity extends AppCompatActivity {
 
             final Button load_more = new Button(context);
             load_more.setText("Load More");
-            load_more.setTextColor(-16777216);
-            load_more.setBackgroundColor(-3355444);
-            online_club_list.addView(load_more);
+           // load_more.setTextColor(-16777216);
+            //load_more.setBackgroundColor(-3355444);
+           // online_club_list.addView(load_more);
             loading.setVisibility(View.GONE);
 
             load_more.setOnClickListener(new View.OnClickListener() {
@@ -143,8 +141,9 @@ public class ClubListActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     load_more.setText("Loading...");
                     pageNum = pageNum + 1;
-                    newUrl = url + "/page/" + String.valueOf(pageNum);
-                    JsoupAsyncTask2 jsoupAsyncTask2 = new JsoupAsyncTask2();
+                    //newUrl = url + "/page/" + String.valueOf(pageNum);
+                    url= url + "/page/" + String.valueOf(pageNum);
+                    JsoupAsyncTask jsoupAsyncTask2 = new JsoupAsyncTask();
                     jsoupAsyncTask2.execute();
                     online_club_list.removeView(load_more);
                 }
@@ -208,9 +207,9 @@ public class ClubListActivity extends AppCompatActivity {
             }
             final Button load_more = new Button(context);
             load_more.setText("Load More");
-            load_more.setTextColor(-16777216);
-            load_more.setBackgroundColor(-3355444);
-            online_club_list.addView(load_more);
+            //load_more.setTextColor(-16777216);
+            //load_more.setBackgroundColor(-3355444);
+            //online_club_list.addView(load_more);
             loading.setVisibility(View.GONE);
 
             load_more.setOnClickListener(new View.OnClickListener() {
@@ -238,11 +237,12 @@ public class ClubListActivity extends AppCompatActivity {
         //////ADD EXCEPTION FOR LAST PAGE
         pageNum = pageNum + 1;
         pageNumView.setText(String.valueOf(pageNum));
-        newUrl = url + "/page/" + String.valueOf(pageNum);
+        url = url + "/page/" + String.valueOf(pageNum);
         online_club_list.removeAllViews();
         loading.setVisibility(View.VISIBLE);
+        parsed_club_names.clear();
 
-        JsoupAsyncTask2 jsoupAsyncTask2 = new JsoupAsyncTask2();
+        JsoupAsyncTask jsoupAsyncTask2 = new JsoupAsyncTask();
         jsoupAsyncTask2.execute();
 
     }
@@ -255,12 +255,13 @@ public class ClubListActivity extends AppCompatActivity {
         else {
             pageNum = pageNum - 1;
             pageNumView.setText(String.valueOf(pageNum));
-            newUrl = url + "/page/" + String.valueOf(pageNum);
+            url = url + "/page/" + String.valueOf(pageNum);
             online_club_list.removeAllViews();
             loading.setVisibility(View.VISIBLE);
+            parsed_club_names.clear();
 
-            JsoupAsyncTask2 jsoupAsyncTask2 = new JsoupAsyncTask2();
-            jsoupAsyncTask2.execute();
+            JsoupAsyncTask jsoupAsyncTask1 = new JsoupAsyncTask();
+            jsoupAsyncTask1.execute();
         }
 
     }
