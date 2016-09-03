@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,6 +20,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
 public class ClubListActivity extends AppCompatActivity {
@@ -33,6 +36,7 @@ public class ClubListActivity extends AppCompatActivity {
     int pageNum;
     String newUrl;
     String ulife;
+    TextView pageNumView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,8 @@ public class ClubListActivity extends AppCompatActivity {
 
         JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
+        pageNumView=(TextView) findViewById(R.id.page_num);
+        pageNumView.setText(String.valueOf(pageNum));
 
         // temp.setVisibility(View.INVISIBLE);
     }
@@ -143,7 +149,7 @@ public class ClubListActivity extends AppCompatActivity {
             });
         }
     }
-
+    /////////////////////////////////////////////////////////////////IO THREAD ASYNC///////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////PROBABLY NEED TO USE ADAPTORS OR SOMETHING, LIST STARTS GETTING SLOW AFTER LOADING TOO MANY CLUBS////////////////////////////
     private class JsoupAsyncTask2 extends AsyncTask<Void, Void, Void> {
 
@@ -175,24 +181,24 @@ public class ClubListActivity extends AppCompatActivity {
             super.onPostExecute(result);
             int count = 0;
             for (int i = ((pageNum - 1) * 25); i < parsed_club_names.size(); i++) {
-                final Button club = new Button(context);
+                final Button club2 = new Button(context);
                 final String name = parsed_club_names.get(i);
-                club.setText(name);
-                club.setTag(count);
-                online_club_list.addView(club);
+                club2.setText(name);
+                club2.setTag(count);
+                online_club_list.addView(club2);
 
-                club.setOnClickListener(new View.OnClickListener() {
+                club2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Element clubLink = htmlDocument.select("ul.listing.innerListing > li > a[href]").get((int) club.getTag());
+                        Element clubLink = htmlDocument.select("ul.listing.innerListing > li > a[href]").get((int) club2.getTag());
                         String clubURL = ulife + clubLink.attr("href");
-                        club.setText("Loading...");
+                        club2.setText("Loading...");
 
                         Intent intent = new Intent(context, ClubPageActivity.class);
                         intent.putExtra("clubPageURL", clubURL);
                         intent.putExtra("clubName", name);
                         startActivity(intent);
-                        club.setText(name);
+                        club2.setText(name);
                     }
                 });
                 count++;
@@ -222,5 +228,37 @@ public class ClubListActivity extends AppCompatActivity {
 
     public static Context getAppContext() {
         return ClubListActivity.context;
+    }
+
+    public void loadNextPage(View view){
+        //load_more.setText("Loading...");
+        //////ADD EXCEPTION FOR LAST PAGE
+        pageNum = pageNum + 1;
+        pageNumView.setText(String.valueOf(pageNum));
+        newUrl = url + "/page/" + String.valueOf(pageNum);
+        online_club_list.removeAllViews();
+
+        JsoupAsyncTask2 jsoupAsyncTask2 = new JsoupAsyncTask2();
+        jsoupAsyncTask2.execute();
+
+    }
+    public void loadPrevPage(View view){
+        //load_more.setText("Loading...");
+        if(pageNum==1){
+            Snackbar.make(view, "First Page", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
+        else {
+            pageNum = pageNum - 1;
+            pageNumView.setText(String.valueOf(pageNum));
+            online_club_list.removeAllViews();
+
+            newUrl = url + "/page/" + String.valueOf(pageNum);
+            online_club_list.removeAllViews();
+
+            JsoupAsyncTask2 jsoupAsyncTask2 = new JsoupAsyncTask2();
+            jsoupAsyncTask2.execute();
+        }
+
     }
 }
