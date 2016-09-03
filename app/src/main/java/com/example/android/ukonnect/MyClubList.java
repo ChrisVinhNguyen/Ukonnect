@@ -2,13 +2,17 @@ package com.example.android.ukonnect;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -25,37 +29,10 @@ public class MyClubList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setTitle("My Club List-testing java layout");
-       /* final Button testButton = new Button(this);
-        testButton.setText("TEST");
-
-        final RelativeLayout myLayout = new RelativeLayout(this);
-        myLayout.addView(testButton);
-        setContentView(myLayout);
-
-       testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(testButton.getText()=="TEST!") {
-                    testButton.setText("TEST");
-                }
-                else{
-                    testButton.setText("TEST!");
-                }
-                addClub();
-            }
-        });*/
-
-        //loading shared preferences
-
-
-        // String clubName;
-
-        //setting content view
         setContentView(R.layout.activity_my_club_list);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-
+        accessDatabase();
 
     }
 
@@ -138,4 +115,42 @@ public class MyClubList extends AppCompatActivity {
         Intent intent = new Intent(this, AddNewActivity.class);
         startActivity(intent);
     }
+
+    public void accessDatabase(){
+        SQLiteDatabase myDB = null;
+        String TableName = "myTable";
+
+        String Data = "";
+
+        //open  Database.
+        try {
+            myDB = this.openOrCreateDatabase("DatabaseName", MODE_PRIVATE, null);
+
+            Cursor c = myDB.rawQuery("SELECT * FROM " + TableName, null);
+
+            int Column1 = c.getColumnIndex("Field1");
+            int Column2 = c.getColumnIndex("Field2");
+
+            // Check if our result was valid.
+            c.moveToFirst();
+            while (c != null) {
+                // Loop through all Results
+
+                String Name = c.getString(Column1);
+                String URL = c.getString(Column2);
+                Data = Data + Name + "/" + URL + "\n";
+                TextView test= (TextView) findViewById(R.id.test_database);
+                test.setText(Data);
+                c.moveToNext();
+            }
+
+        } catch (Exception e) {
+            Log.e("Error", "Error", e);
+        } finally {
+            if (myDB != null)
+                myDB.close();
+        }
+
+    }
+
 }

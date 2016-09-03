@@ -2,6 +2,7 @@ package com.example.android.ukonnect;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -35,6 +38,9 @@ public class ClubPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_page);
 
+        ProgressBar loading = (ProgressBar) findViewById(R.id.loading_bar);
+        loading.setVisibility(View.VISIBLE);
+
         Intent intent = getIntent();
         clubPageURL = intent.getExtras().getString("clubPageURL");
         String clubName = intent.getExtras().getString("clubName");
@@ -56,9 +62,9 @@ public class ClubPageActivity extends AppCompatActivity {
         Elements desciption;
         Elements contactInfo, groupProfile, groupLeaders;
         Element node;
-        Elements contactUs,officialGroupWebsite;
+        Elements contactUs, officialGroupWebsite;
         Element email, website;
-        Boolean hasEmail,hasWebsite;
+        Boolean hasEmail, hasWebsite;
 
         @Override
         protected void onPreExecute() {
@@ -112,11 +118,16 @@ public class ClubPageActivity extends AppCompatActivity {
                 emailAddress = email.attr("href");
             }
 
-            if(hasWebsite){
+            if (hasWebsite) {
                 Button websiteButton = (Button) findViewById(R.id.group_website);
                 websiteButton.setVisibility(View.VISIBLE);
                 groupWebpage = website.attr("href");
             }
+            ProgressBar loading = (ProgressBar) findViewById(R.id.loading_bar);
+            loading.setVisibility(View.GONE);
+
+            ScrollView alltheothershit = (ScrollView) findViewById(R.id.alltheothershit);
+            alltheothershit.setVisibility(View.VISIBLE);
 
         }
     }
@@ -169,10 +180,39 @@ public class ClubPageActivity extends AppCompatActivity {
         editor.putStringSet("Club_List", clubSet);
 
         editor.clear().apply();
+        addClubToSQL(clubName, clubPageURL);
 
         // Intent intent2 = new Intent(this, MyClubList.class);
         // startActivity(intent2);
 
+    }
+
+    public void addClubToSQL(String clubName, String clubPageURL) {
+        SQLiteDatabase myDB = null;
+        String TableName = "myTable";
+
+
+        //Create a Database.
+        try {
+            myDB = this.openOrCreateDatabase("DatabaseName", MODE_PRIVATE, null);
+
+            //Create a Table in the Database.
+            myDB.execSQL("CREATE TABLE IF NOT EXISTS "
+                    + TableName
+                    + " (Field1 VARCHAR, Field2 VARCHAR);");
+
+            //Insert data to a Table
+            myDB.execSQL("INSERT INTO "
+                    + TableName
+                    + " (Field1, Field2)"
+                    + " VALUES ('" + clubName + "','" + clubPageURL + "')");
+            //+ " VALUES ('qwrsqwr', 'qwrsqwr');");
+        } catch (Exception e) {
+            Log.e("Error", "Error", e);
+        } finally {
+            if (myDB != null)
+                myDB.close();
+        }
     }
 }
 

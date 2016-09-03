@@ -2,6 +2,7 @@ package com.example.android.ukonnect;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,7 +53,7 @@ public class MainPageActivity extends AppCompatActivity
 
         ////////////////////////////////////THIS MIGHT NOT WORK////////////////////////////////////////////////////
         ///////////////////////////////////DATABASE SHIT, LOOK AT SQL LATER////////////////////////////////////////
-/*
+
         SQLiteDatabase myDB = null;
         String TableName = "myTable";
 
@@ -64,30 +66,32 @@ public class MainPageActivity extends AppCompatActivity
    //Create a Table in the Database.
             myDB.execSQL("CREATE TABLE IF NOT EXISTS "
                     + TableName
-                    + " (Field1 VARCHAR, Field2 INT(3));");
+                    + " (Field1 VARCHAR, Field2 VARCHAR);");
 
    //Insert data to a Table
-            myDB.execSQL("INSERT INTO "
+           /* myDB.execSQL("INSERT INTO "
                     + TableName
                     + " (Field1, Field2)"
-                    + " VALUES ('Saranga', 22);");
+                    + " VALUES ('Saranga', 'qwsqw');");*/
 
-            Cursor c = myDB.rawQuery("SELECT * FROM " + TableName, null);
+           /* Cursor c = myDB.rawQuery("SELECT * FROM " + TableName, null);
+            c.moveToFirst();
 
             int Column1 = c.getColumnIndex("Field1");
             int Column2 = c.getColumnIndex("Field2");
 
             // Check if our result was valid.
-            c.moveToFirst();
+            //c.moveToFirst();
             if (c != null) {
                 // Loop through all Results
 
                 String Name = c.getString(Column1);
-                int Age = c.getInt(Column2);
-                Data = Data + Name + "/" + Age + "\n";
+                String Age = c.getString(Column2);
+                Data = Data + Name + "/" + Age+"\n";
                 TextView test= (TextView) findViewById(R.id.test_database);
                 test.setText(Data);
-            }
+                c.moveToNext();
+            }*/
         } catch (Exception e) {
             Log.e("Error", "Error", e);
         } finally {
@@ -95,7 +99,7 @@ public class MainPageActivity extends AppCompatActivity
                 myDB.close();
         }
 
-*/
+
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 

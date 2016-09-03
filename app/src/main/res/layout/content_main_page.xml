@@ -41,6 +41,11 @@
             android:drawableLeft="@drawable/ic_list_black_24dp"
             android:paddingLeft="5dp"
             android:onClick="toMyClubList"/>
+        <TextView
+            android:id="@+id/test_database"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
 
         <LinearLayout
