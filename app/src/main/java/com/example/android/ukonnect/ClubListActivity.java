@@ -37,17 +37,21 @@ public class ClubListActivity extends AppCompatActivity {
     String newUrl;
     String ulife;
     TextView pageNumView;
+    ProgressBar loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_list);
 
+
         Intent intent = getIntent();
         String categoryName = intent.getExtras().getString("category");
         online_club_list = (LinearLayout) findViewById(R.id.Club_List_Online);
-
+        loading=(ProgressBar) findViewById(R.id.loading_bar);
+        loading.setVisibility(View.VISIBLE);
         setTitle(categoryName);
+
         ulife = "https://www.ulife.utoronto.ca";
 
         if (categoryName.equals("Social Justice/Advocacy") ) {
@@ -64,17 +68,12 @@ public class ClubListActivity extends AppCompatActivity {
         ClubListActivity.context = getApplicationContext();
         parsed_club_names = new Vector<>(25, 10);
 
-        //ProgressBar loading= new ProgressBar(context, null, R.style.GenericProgressIndicator);
-        //RelativeLayout temp= new RelativeLayout(context,null,R.style.GenericProgressBackground);
-        // temp.addView(loading);
-        // online_club_list.addView(temp);
 
         JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
         pageNumView=(TextView) findViewById(R.id.page_num);
         pageNumView.setText(String.valueOf(pageNum));
 
-        // temp.setVisibility(View.INVISIBLE);
     }
 
     /////////////////////////////////////////////////////////////////IO THREAD ASYNC///////////////////////////////////////////////////////////////////
@@ -83,6 +82,7 @@ public class ClubListActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
         }
 
         @Override
@@ -113,6 +113,7 @@ public class ClubListActivity extends AppCompatActivity {
                 club.setTag(i);
                 online_club_list.addView(club);
 
+
                 club.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -135,6 +136,7 @@ public class ClubListActivity extends AppCompatActivity {
             load_more.setTextColor(-16777216);
             load_more.setBackgroundColor(-3355444);
             online_club_list.addView(load_more);
+            loading.setVisibility(View.GONE);
 
             load_more.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -179,6 +181,7 @@ public class ClubListActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            online_club_list.removeView(loading);
             int count = 0;
             for (int i = ((pageNum - 1) * 25); i < parsed_club_names.size(); i++) {
                 final Button club2 = new Button(context);
@@ -203,12 +206,12 @@ public class ClubListActivity extends AppCompatActivity {
                 });
                 count++;
             }
-
             final Button load_more = new Button(context);
             load_more.setText("Load More");
             load_more.setTextColor(-16777216);
             load_more.setBackgroundColor(-3355444);
             online_club_list.addView(load_more);
+            loading.setVisibility(View.GONE);
 
             load_more.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -237,6 +240,7 @@ public class ClubListActivity extends AppCompatActivity {
         pageNumView.setText(String.valueOf(pageNum));
         newUrl = url + "/page/" + String.valueOf(pageNum);
         online_club_list.removeAllViews();
+        loading.setVisibility(View.VISIBLE);
 
         JsoupAsyncTask2 jsoupAsyncTask2 = new JsoupAsyncTask2();
         jsoupAsyncTask2.execute();
@@ -251,10 +255,9 @@ public class ClubListActivity extends AppCompatActivity {
         else {
             pageNum = pageNum - 1;
             pageNumView.setText(String.valueOf(pageNum));
-            online_club_list.removeAllViews();
-
             newUrl = url + "/page/" + String.valueOf(pageNum);
             online_club_list.removeAllViews();
+            loading.setVisibility(View.VISIBLE);
 
             JsoupAsyncTask2 jsoupAsyncTask2 = new JsoupAsyncTask2();
             jsoupAsyncTask2.execute();
