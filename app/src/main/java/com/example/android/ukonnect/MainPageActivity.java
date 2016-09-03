@@ -38,6 +38,7 @@ public class MainPageActivity extends AppCompatActivity
                 editor.clear();
                 editor.commit();
 
+                clearDB();
             }
         });
 
@@ -54,7 +55,7 @@ public class MainPageActivity extends AppCompatActivity
         ////////////////////////////////////THIS MIGHT NOT WORK////////////////////////////////////////////////////
         ///////////////////////////////////DATABASE SHIT, LOOK AT SQL LATER////////////////////////////////////////
 
-        SQLiteDatabase myDB = null;
+      /*  SQLiteDatabase myDB = null;
         String TableName = "myTable";
 
         String Data = "";
@@ -91,14 +92,14 @@ public class MainPageActivity extends AppCompatActivity
                 TextView test= (TextView) findViewById(R.id.test_database);
                 test.setText(Data);
                 c.moveToNext();
-            }*/
+            }
         } catch (Exception e) {
             Log.e("Error", "Error", e);
         } finally {
             if (myDB != null)
                 myDB.close();
         }
-
+*/
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
@@ -174,5 +175,21 @@ public class MainPageActivity extends AppCompatActivity
     public void toMyClubList(View view) {
         Intent intent = new Intent(this, MyClubList.class);
         startActivity(intent);
+    }
+
+    public void clearDB() {
+        SQLiteDatabase myDB = null;
+        String TableName = "myTable";
+
+        //Create a Database.
+        try {
+            myDB = this.openOrCreateDatabase("DatabaseName", MODE_PRIVATE, null);
+            myDB.delete(TableName, null, null);
+        } catch (Exception e) {
+            Log.e("Error", "Error", e);
+        } finally {
+            if (myDB != null)
+                myDB.close();
+        }
     }
 }
