@@ -28,7 +28,6 @@ public class ClubListActivity extends AppCompatActivity {
     Element node;
     Vector<String> parsed_club_names;
     String url;
-    // Button club;
     LinearLayout online_club_list;
     private static Context context;
     int pageNum;
@@ -46,17 +45,15 @@ public class ClubListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String categoryName = intent.getExtras().getString("category");
         online_club_list = (LinearLayout) findViewById(R.id.Club_List_Online);
-        loading=(ProgressBar) findViewById(R.id.loading_bar);
+        loading = (ProgressBar) findViewById(R.id.loading_bar);
         loading.setVisibility(View.VISIBLE);
         setTitle(categoryName);
 
         ulife = "https://www.ulife.utoronto.ca";
 
-        if (categoryName.equals("Social Justice/Advocacy") ) {
+        if (categoryName.equals("Social Justice/Advocacy")) {
             url = ulife + "/interests/list/type/justice";
-        }
-
-        else {
+        } else {
             categoryName = categoryName.toLowerCase();
             String[] shortenedString = categoryName.split(" ");
             pageNum = 1;
@@ -69,7 +66,7 @@ public class ClubListActivity extends AppCompatActivity {
 
         JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
-        pageNumView=(TextView) findViewById(R.id.page_num);
+        pageNumView = (TextView) findViewById(R.id.page_num);
         pageNumView.setText(String.valueOf(pageNum));
 
     }
@@ -131,9 +128,9 @@ public class ClubListActivity extends AppCompatActivity {
 
             final Button load_more = new Button(context);
             load_more.setText("Load More");
-           // load_more.setTextColor(-16777216);
+            // load_more.setTextColor(-16777216);
             //load_more.setBackgroundColor(-3355444);
-           // online_club_list.addView(load_more);
+            // online_club_list.addView(load_more);
             loading.setVisibility(View.GONE);
 
             load_more.setOnClickListener(new View.OnClickListener() {
@@ -142,16 +139,21 @@ public class ClubListActivity extends AppCompatActivity {
                     load_more.setText("Loading...");
                     pageNum = pageNum + 1;
                     //newUrl = url + "/page/" + String.valueOf(pageNum);
-                    url= url + "/page/" + String.valueOf(pageNum);
+                    url = url + "/page/" + String.valueOf(pageNum);
                     JsoupAsyncTask jsoupAsyncTask2 = new JsoupAsyncTask();
                     jsoupAsyncTask2.execute();
                     online_club_list.removeView(load_more);
                 }
             });
+            Button prevButton=(Button) findViewById(R.id.prev_button);
+            prevButton.setEnabled(true);
+            Button nextButton=(Button) findViewById(R.id.next_button);
+            nextButton.setEnabled(true);
         }
     }
+
     /////////////////////////////////////////////////////////////////IO THREAD ASYNC///////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////PROBABLY NEED TO USE ADAPTORS OR SOMETHING, LIST STARTS GETTING SLOW AFTER LOADING TOO MANY CLUBS////////////////////////////
+    //////////////////////////////////////////////////////SHIT CODE////////////////////////////////////////////////////////////////////////////////////
     private class JsoupAsyncTask2 extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -232,27 +234,37 @@ public class ClubListActivity extends AppCompatActivity {
         return ClubListActivity.context;
     }
 
-    public void loadNextPage(View view){
+    public void loadNextPage(View view) {
         //load_more.setText("Loading...");
         //////ADD EXCEPTION FOR LAST PAGE
-        pageNum = pageNum + 1;
-        pageNumView.setText(String.valueOf(pageNum));
-        url = url + "/page/" + String.valueOf(pageNum);
-        online_club_list.removeAllViews();
-        loading.setVisibility(View.VISIBLE);
-        parsed_club_names.clear();
+        if (false) {
+            Snackbar.make(view, "Last Page", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        } else {
+            pageNum = pageNum + 1;
+            pageNumView.setText(String.valueOf(pageNum));
+            url = url + "/page/" + String.valueOf(pageNum);
+            online_club_list.removeAllViews();
+            loading.setVisibility(View.VISIBLE);
+            parsed_club_names.clear();
 
-        JsoupAsyncTask jsoupAsyncTask2 = new JsoupAsyncTask();
-        jsoupAsyncTask2.execute();
+            Button prevButton=(Button) findViewById(R.id.prev_button);
+            prevButton.setEnabled(false);
+            Button nextButton=(Button) findViewById(R.id.next_button);
+            nextButton.setEnabled(false);
+
+            JsoupAsyncTask jsoupAsyncTask2 = new JsoupAsyncTask();
+            jsoupAsyncTask2.execute();
+        }
 
     }
-    public void loadPrevPage(View view){
+
+    public void loadPrevPage(View view) {
         //load_more.setText("Loading...");
-        if(pageNum==1){
+        if (pageNum == 1) {
             Snackbar.make(view, "First Page", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-        }
-        else {
+        } else {
             pageNum = pageNum - 1;
             pageNumView.setText(String.valueOf(pageNum));
             url = url + "/page/" + String.valueOf(pageNum);
@@ -260,8 +272,14 @@ public class ClubListActivity extends AppCompatActivity {
             loading.setVisibility(View.VISIBLE);
             parsed_club_names.clear();
 
+            Button prevButton=(Button) findViewById(R.id.prev_button);
+            prevButton.setEnabled(false);
+            Button nextButton=(Button) findViewById(R.id.next_button);
+            nextButton.setEnabled(false);
+
             JsoupAsyncTask jsoupAsyncTask1 = new JsoupAsyncTask();
             jsoupAsyncTask1.execute();
+
         }
 
     }
