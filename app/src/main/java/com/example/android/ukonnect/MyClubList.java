@@ -20,7 +20,7 @@ import java.util.TreeSet;
 public class MyClubList extends AppCompatActivity {
     public static final String prefName = "MyClubListPref";
     public Set<String> clubSet = new TreeSet<>();
-
+    Button noClubs;
     private static Context context;
     String ulife;
 
@@ -37,6 +37,11 @@ public class MyClubList extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        noClubs = new Button(this);
+        noClubs.setText("You are not a member of any clubs!!!");
+        LinearLayout list_layout = (LinearLayout) findViewById(R.id.Club_List_linear);
+        list_layout.addView(noClubs);
+
         accessDatabase();
 
        /* SharedPreferences list = getSharedPreferences(prefName, 0);
@@ -118,7 +123,8 @@ public class MyClubList extends AppCompatActivity {
                 newClub.setText(Name);
                 list_layout.addView(newClub);
                 c.moveToNext();
-
+                list_layout.removeView(noClubs);
+                
                 newClub.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
