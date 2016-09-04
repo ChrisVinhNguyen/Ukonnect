@@ -257,9 +257,9 @@ public class awnmkjteonawjketawbnejuilthbuawjiletgbuilawegutilagweu extends AppC
             }
 
         } else if (count == 9) {
+            grid.setBackgroundColor(Color.TRANSPARENT);
             draw();
             grid.removeAllViews();
-
             TextView temp = new TextView(this);
             temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 100);
             temp.setTextColor(-65281);

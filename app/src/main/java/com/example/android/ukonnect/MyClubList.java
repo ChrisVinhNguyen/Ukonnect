@@ -41,23 +41,43 @@ public class MyClubList extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         noClubs = new Button(this);
-        final String noClubsString="You are not a member of any clubs!!!";
+        final String noClubsString="No clubs in list";
         noClubs.setText(noClubsString);
         LinearLayout list_layout = (LinearLayout) findViewById(R.id.Club_List_linear);
         list_layout.addView(noClubs);
 
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.swag);
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.getready);
 
         noClubs.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 swagCounter++;
                 if (swagCounter==7) {
                     mp.start();
-                    noClubs.setText("ʕ •̀ o •́ ʔ    ʕ •̀ o •́ ʔ    ʕ •̀ o •́ ʔ    ʕ •̀ o •́ ʔ    ʕ •̀ o •́ ʔ");
+                    noClubs.setText("ʕ •̀ o •́ ʔ    KEEP GOING PUNK    ʕ •̀ o •́ ʔ");
                     noClubs.setTextColor(-65536);
                     noClubs.setBackgroundColor(-16776961);
                 }
-                if(swagCounter==14) {
+                if(swagCounter==12){
+                    MediaPlayer temp = MediaPlayer.create(context, R.raw.five);
+                    temp.start();
+                }
+                if(swagCounter==13){
+                    MediaPlayer temp = MediaPlayer.create(context, R.raw.four);
+                    temp.start();
+                }
+                if(swagCounter==14){
+                    MediaPlayer temp = MediaPlayer.create(context, R.raw.three);
+                    temp.start();
+                }
+                if(swagCounter==15){
+                    MediaPlayer temp = MediaPlayer.create(context, R.raw.two);
+                    temp.start();
+                }
+                if(swagCounter==16){
+                    MediaPlayer temp = MediaPlayer.create(context, R.raw.one);
+                    temp.start();
+                }
+                if(swagCounter==17) {
                     swagCounter=0;
                     Intent intent = new Intent(context, awnmkjteonawjketawbnejuilthbuawjiletgbuilawegutilagweu.class);
                     startActivity(intent);
@@ -85,7 +105,6 @@ public class MyClubList extends AppCompatActivity {
             list_layout.addView(newClub);
         }
         */
-
     }
 
     @Override
