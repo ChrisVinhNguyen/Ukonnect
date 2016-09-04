@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,6 +24,7 @@ public class MyClubList extends AppCompatActivity {
     Button noClubs;
     private static Context context;
     String ulife;
+    int swagCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +34,31 @@ public class MyClubList extends AppCompatActivity {
 
         MyClubList.context = getApplicationContext();
         ulife = "https://www.ulife.utoronto.ca";
+        swagCounter = 0;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         noClubs = new Button(this);
-        noClubs.setText("You are not a member of any clubs!!!");
+        final String noClubsString="You are not a member of any clubs!!!";
+        noClubs.setText(noClubsString);
         LinearLayout list_layout = (LinearLayout) findViewById(R.id.Club_List_linear);
         list_layout.addView(noClubs);
+
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.swag);
+
+        noClubs.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                swagCounter++;
+                if (swagCounter==10) {
+                    mp.start();
+                    noClubs.setTextColor(-65536);
+                    noClubs.setBackgroundColor(-16776961);
+                    swagCounter=0;
+                }
+            }
+        });
 
         accessDatabase();
 
@@ -118,13 +136,13 @@ public class MyClubList extends AppCompatActivity {
                 final String URL = c.getString(Column2);
                 Data = Data + Name + "/" + URL + "\n";
                 //TextView test = (TextView) findViewById(R.id.test_database);
-               // test.setText(Data);
+                // test.setText(Data);
                 final Button newClub = new Button(this);
                 newClub.setText(Name);
                 list_layout.addView(newClub);
                 c.moveToNext();
                 list_layout.removeView(noClubs);
-                
+
                 newClub.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
