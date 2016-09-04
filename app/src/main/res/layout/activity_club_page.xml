@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:id="@+id/loading_bar"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
     </LinearLayout>
 
     <ScrollView

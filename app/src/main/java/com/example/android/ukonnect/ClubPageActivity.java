@@ -1,7 +1,7 @@
 package com.example.android.ukonnect;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -21,7 +21,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -39,7 +38,7 @@ public class ClubPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_club_page);
 
         ProgressBar loading = (ProgressBar) findViewById(R.id.loading_bar);
-        loading.setVisibility(View.VISIBLE);
+        //loading.setVisibility(View.VISIBLE);
 
         Intent intent = getIntent();
         clubPageURL = intent.getExtras().getString("clubPageURL");
@@ -57,6 +56,8 @@ public class ClubPageActivity extends AppCompatActivity {
         jsoupAsyncTask.execute();
 
     }
+
+    /////////////////////////////////////////////////////////////////IO THREAD ASYNC///////////////////////////////////////////////////////////////////
 
     private class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
         Elements desciption;
@@ -157,33 +158,20 @@ public class ClubPageActivity extends AppCompatActivity {
 
     public void addClub(View view) {
 
-        SharedPreferences list = getSharedPreferences(prefName, 0);
-        Set<String> newClubList = new HashSet<>();
-        newClubList.add("No Clubs Added");
-        clubSet = list.getStringSet("Club_List", newClubList);
-
         Intent intent = getIntent();
         String clubName = intent.getExtras().getString("clubName");
-        if (clubSet.contains(clubName)) {
+        if (SQLcontains(clubName)) {
             Snackbar.make(view, "Club already in list", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
             return;
         }
-        clubSet.add(clubName);
-        clubSet.remove("No Clubs Added");
+
 
         Snackbar.make(view, "Club added", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
 
-        //save preferences
-        SharedPreferences.Editor editor = list.edit();
-        editor.putStringSet("Club_List", clubSet);
-
-        editor.clear().apply();
         addClubToSQL(clubName, clubPageURL);
 
-        // Intent intent2 = new Intent(this, MyClubList.class);
-        // startActivity(intent2);
 
     }
 
@@ -213,6 +201,40 @@ public class ClubPageActivity extends AppCompatActivity {
             if (myDB != null)
                 myDB.close();
         }
+    }
+    public boolean SQLcontains(String clubName){
+        SQLiteDatabase myDB = null;
+        String TableName = "myTable";
+
+
+        //open  Database.
+        try {
+            myDB = this.openOrCreateDatabase("DatabaseName", MODE_PRIVATE, null);
+
+            Cursor c = myDB.rawQuery("SELECT * FROM " + TableName, null);
+
+            int Column1 = c.getColumnIndex("Field1");
+
+            // Check if our result was valid.
+            c.moveToFirst();
+            while (c != null) {
+                // Loop through all Results
+
+                final String Name = c.getString(Column1);
+                if(clubName.equals(Name)){
+                    return true;
+                }
+                c.moveToNext();
+
+            }
+
+        } catch (Exception e) {
+            Log.e("Error", "Error", e);
+        } finally {
+            if (myDB != null)
+                myDB.close();
+        }
+        return false;
     }
 }
 

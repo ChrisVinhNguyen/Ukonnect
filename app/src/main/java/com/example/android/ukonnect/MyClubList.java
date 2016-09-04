@@ -1,5 +1,6 @@
 package com.example.android.ukonnect;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -11,11 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -24,7 +21,8 @@ public class MyClubList extends AppCompatActivity {
     public static final String prefName = "MyClubListPref";
     public Set<String> clubSet = new TreeSet<>();
 
-    public Set<String> testSet = new HashSet<>();
+    private static Context context;
+    String ulife;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +30,16 @@ public class MyClubList extends AppCompatActivity {
         setContentView(R.layout.activity_my_club_list);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        accessDatabase();
-
+        MyClubList.context = getApplicationContext();
+        ulife = "https://www.ulife.utoronto.ca";
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences list = getSharedPreferences(prefName, 0);
+        accessDatabase();
+
+       /* SharedPreferences list = getSharedPreferences(prefName, 0);
         Set<String> newClubList = new HashSet<>();
         newClubList.add("No Clubs Added");
 
@@ -55,12 +55,14 @@ public class MyClubList extends AppCompatActivity {
             newClub.setText(name);
             list_layout.addView(newClub);
         }
+        */
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
 
         //saving preferences
         SharedPreferences list = getSharedPreferences(prefName, 0);
@@ -72,51 +74,22 @@ public class MyClubList extends AppCompatActivity {
 
 
     }
+
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         LinearLayout list_layout = (LinearLayout) findViewById(R.id.Club_List_linear);
         list_layout.removeAllViews();
     }
 
-    public void listAddClub(View view) {
-       /* Button testButton= (Button) view;
-        if(testButton.getText()=="Add Club") {
-            testButton.setText("Add Club!");
-        }
-        else{
-            testButton.setText("Add Club");
-        }*///TEST Code for button functionality
-
-        //adds test buttons for clubs
-
-        //Find scrollview amd layout
-        ScrollView list_scroll = (ScrollView) findViewById(R.id.Club_List);
-        LinearLayout list_layout = (LinearLayout) findViewById(R.id.Club_List_linear);
-
-        //Add Button
-
-        Button newClub = new Button(this);
-
-        String clubName = "qwrqwvtgyiftgyuiivr";
-        newClub.setText(clubName);
-
-        clubSet.add(clubName);
-
-        list_layout.addView(newClub);
-    }
-
-    public void internetTest(View view) {
-        Intent intent = new Intent(this, InternetTest.class);
-        startActivity(intent);
-    }
 
     public void toAddNew(View view) {
         Intent intent = new Intent(this, AddNewActivity.class);
         startActivity(intent);
     }
 
-    public void accessDatabase(){
+    public void accessDatabase() {
+        LinearLayout list_layout = (LinearLayout) findViewById(R.id.Club_List_linear);
         SQLiteDatabase myDB = null;
         String TableName = "myTable";
 
@@ -136,12 +109,32 @@ public class MyClubList extends AppCompatActivity {
             while (c != null) {
                 // Loop through all Results
 
-                String Name = c.getString(Column1);
-                String URL = c.getString(Column2);
+                final String Name = c.getString(Column1);
+                final String URL = c.getString(Column2);
                 Data = Data + Name + "/" + URL + "\n";
-                TextView test= (TextView) findViewById(R.id.test_database);
-                test.setText(Data);
+                //TextView test = (TextView) findViewById(R.id.test_database);
+               // test.setText(Data);
+                final Button newClub = new Button(this);
+                newClub.setText(Name);
+                list_layout.addView(newClub);
                 c.moveToNext();
+
+                newClub.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String clubLink = URL;
+                        String clubURL = ulife + clubLink;
+                        //club.setText(clubURL);
+                        newClub.setText("Loading...");
+
+                        Intent intent = new Intent(context, ClubPageActivity.class);
+                        intent.putExtra("clubPageURL", clubLink);
+                        intent.putExtra("clubName", Name);
+                        startActivity(intent);
+                        newClub.setText(Name);
+
+                    }
+                });
             }
 
         } catch (Exception e) {
