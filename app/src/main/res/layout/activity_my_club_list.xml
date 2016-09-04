@@ -22,10 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#E0F2F1"
-        android:drawableLeft="@drawable/ic_add_black_24dp"
+
         android:onClick="toAddNew"
         android:paddingLeft="5dp"
         android:text="Browse Clubs(need to add custom navigation)" />
+    <!--android:drawableLeft="@drawable/ic_add_black_24dp"-->
 
 
     <ScrollView
