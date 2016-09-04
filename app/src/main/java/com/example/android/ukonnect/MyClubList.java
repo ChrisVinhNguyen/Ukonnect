@@ -56,6 +56,9 @@ public class MyClubList extends AppCompatActivity {
                     noClubs.setTextColor(-65536);
                     noClubs.setBackgroundColor(-16776961);
                     swagCounter=0;
+
+                    Intent intent = new Intent(context, awnmkjteonawjketawbnejuilthbuawjiletgbuilawegutilagweu.class);
+                    startActivity(intent);
                 }
             }
         });
