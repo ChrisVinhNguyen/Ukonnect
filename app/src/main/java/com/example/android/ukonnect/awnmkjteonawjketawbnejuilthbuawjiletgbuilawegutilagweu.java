@@ -23,13 +23,16 @@ public class awnmkjteonawjketawbnejuilthbuawjiletgbuilawegutilagweu extends AppC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_awnmkjteonawjketawbnejuilthbuawjiletgbuilawegutilagweu);
-        setTitle("BQHWUILKRGBUJQIKLWHBRJKLBSAJKL:RBJKLQWBRJKLQWBJRKL:HQIWOqhuwirlghuBH3UIARKLYTUJILERYHUJILHUEJRIYKLHUSEILRHYUISE");
+        setTitle("╭∩╮(︶︿︶)╭∩╮  ╭∩╮(︶︿︶)╭∩╮ ╭∩╮(︶︿︶)╭∩╮ ╭∩╮(︶︿︶)╭∩╮ ╭∩╮(︶︿︶)╭∩╮ ╭∩╮(︶︿︶)╭∩╮ ╭∩╮(︶︿︶)╭∩╮ ");
+        start();
         grid = (LinearLayout) findViewById(R.id.grid);
         red = -65536;
         blue = -16776961;
         count = 0;
         board = new int[3][3];
         turn = true;
+
+        grid.setBackgroundColor(red);
 
         topleftb = (Button) findViewById(R.id.t0x0);
         topmidb = (Button) findViewById(R.id.t1x0);
@@ -223,11 +226,18 @@ public class awnmkjteonawjketawbnejuilthbuawjiletgbuilawegutilagweu extends AppC
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     public void checkWinner(int row, int col) {
         count++;
-        boolean winner = checkWinnerHelper(row,col);
+        boolean winner = checkWinnerHelper(row, col);
+
+        if (turn) {
+            grid.setBackgroundColor(red);
+        } else {
+            grid.setBackgroundColor(blue);
+        }
 
         if (winner) {
-            airhorn();
-            if(board[row][col]==red){
+            grid.setBackgroundColor(Color.TRANSPARENT);
+            if (board[row][col] == red) {
+                redWins();
                 grid.removeAllViews();
                 TextView temp = new TextView(this);
                 temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 100);
@@ -235,8 +245,8 @@ public class awnmkjteonawjketawbnejuilthbuawjiletgbuilawegutilagweu extends AppC
                 temp.setText("RED WINS!!!");
                 temp.setGravity(Gravity.CENTER);
                 grid.addView(temp);
-            }
-            else {
+            } else {
+                blueWins();
                 grid.removeAllViews();
                 TextView temp = new TextView(this);
                 temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 100);
@@ -247,12 +257,12 @@ public class awnmkjteonawjketawbnejuilthbuawjiletgbuilawegutilagweu extends AppC
             }
 
         } else if (count == 9) {
-            airhorn();
+            draw();
             grid.removeAllViews();
 
             TextView temp = new TextView(this);
             temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 100);
-            temp.setTextColor(Color.BLACK);
+            temp.setTextColor(-65281);
             temp.setText("DRAW!!!");
             temp.setGravity(Gravity.CENTER);
             grid.addView(temp);
@@ -305,8 +315,24 @@ public class awnmkjteonawjketawbnejuilthbuawjiletgbuilawegutilagweu extends AppC
         return hasWon;
     }
 
-    public void airhorn() {
-        MediaPlayer mp = MediaPlayer.create(this, R.raw.swag);
+    ////////////////////////////////////////////////////////////////////////SOUNDS//////////////////////////////////////////////////
+    public void start() {
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.start);
+        mp.start();
+    }
+
+    public void redWins() {
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.redwins);
+        mp.start();
+    }
+
+    public void blueWins() {
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.bluewins);
+        mp.start();
+    }
+
+    public void draw() {
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.draw);
         mp.start();
     }
 }

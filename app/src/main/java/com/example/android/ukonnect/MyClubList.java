@@ -51,14 +51,17 @@ public class MyClubList extends AppCompatActivity {
         noClubs.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 swagCounter++;
-                if (swagCounter==10) {
+                if (swagCounter==7) {
                     mp.start();
+                    noClubs.setText("ʕ •̀ o •́ ʔ    ʕ •̀ o •́ ʔ    ʕ •̀ o •́ ʔ    ʕ •̀ o •́ ʔ    ʕ •̀ o •́ ʔ");
                     noClubs.setTextColor(-65536);
                     noClubs.setBackgroundColor(-16776961);
+                }
+                if(swagCounter==14) {
                     swagCounter=0;
-
                     Intent intent = new Intent(context, awnmkjteonawjketawbnejuilthbuawjiletgbuilawegutilagweu.class);
                     startActivity(intent);
+
                 }
             }
         });
