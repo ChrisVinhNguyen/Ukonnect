@@ -9,25 +9,27 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.android.ukonnect.ClubListActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <ProgressBar
+            android:id="@+id/loading_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:id="@+id/loading_bar"
             android:layout_weight="1"
-            android:visibility="visible"/>
+            android:visibility="visible" />
     </LinearLayout>
 
     <ScrollView
         android:id="@+id/Club_List_Catagories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:layout_weight="30">
+        android:layout_weight="30"
+        android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/Club_List_Online"
@@ -44,8 +46,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
-        android:orientation="horizontal"
-        android:layout_weight="0.5">
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
 
 
         <Button
@@ -53,24 +55,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/ic_keyboard_arrow_left_black_18dp"
-            android:text="Prev"
-            android:onClick="loadPrevPage"/>
+            android:onClick="loadPrevPage"
+            android:text="Prev" />
+        <!--android:drawableLeft="@drawable/ic_keyboard_arrow_left_black_18dp"-->
+
+
         <TextView
+            android:id="@+id/page_num"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textStyle="bold"
-            android:id="@+id/page_num"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/next_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_18dp"
-            android:text="Next"
-            android:onClick="loadNextPage"/>
+            android:onClick="loadNextPage"
+            android:text="Next" />
+        <!--android:drawableRight="@drawable/ic_keyboard_arrow_right_black_18dp"-->
+
     </LinearLayout>
 </LinearLayout>
