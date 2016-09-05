@@ -56,9 +56,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="loadPrevPage"
-            android:text="Prev" />
-        <!--android:drawableLeft="@drawable/ic_keyboard_arrow_left_black_18dp"-->
-
+            android:text="Prev"
+            android:drawableLeft="@drawable/ic_keyboard_arrow_left_black_18dp"/>
 
         <TextView
             android:id="@+id/page_num"
@@ -74,8 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="loadNextPage"
-            android:text="Next" />
-        <!--android:drawableRight="@drawable/ic_keyboard_arrow_right_black_18dp"-->
+            android:text="Next"
+            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_18dp"/>
 
     </LinearLayout>
 </LinearLayout>

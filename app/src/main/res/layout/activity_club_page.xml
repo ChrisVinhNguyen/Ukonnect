@@ -7,16 +7,18 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.android.ukonnect.ClubPageActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <ProgressBar
+            android:id="@+id/loading_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:id="@+id/loading_bar"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </LinearLayout>
 
     <ScrollView
@@ -103,12 +105,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#E0F2F1"
-                    android:text="Group Website"
+                    android:drawableLeft="@drawable/ic_language_black_18dp"
                     android:drawablePadding="2dip"
+                    android:onClick="toGroupWebsite"
                     android:paddingLeft="4dp"
-                    android:visibility="gone"
-                    android:onClick="toGroupWebsite"/>
-                 <!--  android:drawableLeft="@drawable/ic_language_black_18dp"-->
+                    android:text="Group Website"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/contact_email"
@@ -116,12 +118,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#B2DFDB"
-                    android:paddingLeft="4dp"
+                    android:drawableLeft="@android:drawable/ic_dialog_email"
                     android:drawablePadding="2dp"
+                    android:onClick="toContactEmail"
+                    android:paddingLeft="4dp"
                     android:text="Contact Email"
-                    android:visibility="gone"
-                    android:onClick="toContactEmail"/>
-                <!-- android:drawableLeft="@android:drawable/ic_dialog_email"-->
+                    android:visibility="gone" />
             </LinearLayout>
 
             <Button
@@ -129,16 +131,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#80CBC4"
-                android:text="Club Discussion Page" />
+                android:text="Club Discussion Page"
+                android:drawableLeft="@drawable/ic_chat_black_24dp"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#B2D3CB"
+                android:onClick="addClub"
                 android:text="Add to Club list"
-                android:onClick="addClub"/>
-            <!--android:drawableLeft="@drawable/ic_add_black_24dp"  -->
+                android:drawableLeft="@drawable/ic_add_black_24dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -169,6 +172,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -210,6 +214,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -220,7 +225,6 @@
                             android:textAllCaps="false"
                             android:textSize="15sp"
                             android:textStyle="bold" />
-
 
 
                     </LinearLayout>
